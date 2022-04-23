@@ -1,28 +1,4 @@
-class Stack {
-  private data: TreeNode[] = []
-  push(node: TreeNode) {
-    this.data.push(node)
-  }
-  pop(): TreeNode | null {
-    return this.data.pop()
-  }
-  isEmpty(): boolean {
-    return this.data.length === 0
-  }
-}
-
-class Queue {
-  private data: TreeNode[] = []
-  enqueue(node: TreeNode) {
-    this.data.push(node)
-  }
-  dequeue(): TreeNode | null {
-    return this.data.shift()
-  }
-  isEmpty(): boolean {
-    return this.data.length === 0
-  }
-}
+import { Queue, Stack } from "../shared/utils"
 
 class TreeNode {
   val: number
@@ -49,7 +25,7 @@ class TreeNode {
  */
 function preOrderUnRecur(root: TreeNode): number[] {
   const returnData: number[] = []
-  const treeStack = new Stack()
+  const treeStack = new Stack<TreeNode>()
   treeStack.push(root)
   while (!treeStack.isEmpty()) {
     const cur = treeStack.pop()
@@ -78,8 +54,8 @@ function preOrderUnRecur(root: TreeNode): number[] {
  */
 function postOrderUnRecur(root: TreeNode): number[] {
   const returnData: number[] = []
-  const treeStack = new Stack()
-  const collectStack = new Stack()
+  const treeStack = new Stack<TreeNode>()
+  const collectStack = new Stack<TreeNode>()
   treeStack.push(root)
   while (!treeStack.isEmpty()) {
     const cur = treeStack.pop()
@@ -111,7 +87,7 @@ function postOrderUnRecur(root: TreeNode): number[] {
  */
 function inOrderUnRecur(root: TreeNode): number[] {
   const returnData: number[] = []
-  const treeStack = new Stack()
+  const treeStack = new Stack<TreeNode>()
   let cur = root
   while (cur || !treeStack.isEmpty()) {
     if (cur) {
@@ -137,7 +113,7 @@ function inOrderUnRecur(root: TreeNode): number[] {
  */
 function levelOrderUnRecur(root: TreeNode): number[] {
   const returnData: number[] = []
-  const treeQueue = new Queue()
+  const treeQueue = new Queue<TreeNode>()
   treeQueue.enqueue(root)
   while (!treeQueue.isEmpty()) {
     const cur = treeQueue.dequeue()
@@ -165,7 +141,7 @@ function getMaxWidth(root: TreeNode): number {
   if (root === null) {
     return 0
   }
-  const queue = new Queue()
+  const queue = new Queue<TreeNode>()
   queue.enqueue(root)
   const levelMap = new Map()
   levelMap.set(root, 1)
