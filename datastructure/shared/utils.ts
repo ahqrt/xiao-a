@@ -28,4 +28,7 @@ export class Queue<T> {
   isEmpty(): boolean {
     return this.data.length === 0
   }
+  sort(sortFn: (a: T, b: T) => number) {
+    this.data.sort(sortFn)
+  }
 }
