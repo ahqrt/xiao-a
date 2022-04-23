@@ -1,0 +1,20 @@
+{
+  "name": "datastructure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^2.9.5",
+    "vitest": "^0.9.3"
+  },
+  "devDependencies": {
+    "c8": "^7.11.0"
+  }
+}
