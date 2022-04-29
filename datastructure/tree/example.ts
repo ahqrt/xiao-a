@@ -1,5 +1,5 @@
 /**
-*  1. 给定一颗二叉树的头节点，返回这颗二叉树是不是平衡二叉树
+*  给定一颗二叉树的头节点，返回这颗二叉树是不是平衡二叉树
   二叉树的递归套路解法：
     1. 假设树以x为头，
       首先我的左树是平衡的
@@ -8,7 +8,7 @@
 
     2. 向左树和右树要信息
       信息包括，是否平，以及右树高度是多少
-      发现左右树的要求是一样的，所以可以使用递归套路
+      发现左右树的要求是一样的，所以不用求全集，使用递归套路
  */
 
 interface Result {
@@ -55,3 +55,9 @@ function isBalancedTree(root: TreeNode): Result {
 export function isBalanced(root: TreeNode): boolean {
   return isBalancedTree(root).isBalanced
 }
+
+
+/**
+ *  给定一颗二叉树的头节点head，任何两个节点之间都存在距离
+ * 返回整颗二叉树的最大距离
+ */
