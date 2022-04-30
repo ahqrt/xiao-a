@@ -37,3 +37,29 @@ export function testHanoi(n: number) {
 }
 
 
+/**
+ * 仰望一个好的尝试
+ * 
+ * 给你一个栈，逆序输出这个栈
+ * 不能申请额外的数据结构
+ * 只能使用递归，如何实现
+ */
+function reverseStack(stack: Array<number>) {
+  if (stack.length === 0) {
+    return
+  }
+  const i = f(stack)
+  reverseStack(stack)
+  stack.push(i)
+}
+
+function f(stack: Array<number>) {
+  const res = stack.pop()
+  if (stack.length === 0) {
+    return res
+  } else {
+    const last = f(stack)
+    stack.push(res)
+    return last
+  }
+}
