@@ -154,3 +154,21 @@ function process2(str: string[], i: number, res: string[]) {
     swap(str, i, j)
   }
 }
+
+/**
+ * 分支限界处理字符串的全排列
+ */
+function process3(str: string[], i: number, res: string[]) {
+  if (i === str.length) {
+    res.push(str.join(''))
+  }
+  const visit: boolean[] = new Array(26).fill(false)
+  for (let j = 0; j < str.length; j++) {
+    if (!visit[str[j].charCodeAt(0) - 97]) {
+      visit[str[j].charCodeAt(0) - 97] = true
+      swap(str, i, j)
+      process3(str, i + 1, res)
+      swap(str, i, j)
+    }
+  }
+}
