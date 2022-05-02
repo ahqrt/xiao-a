@@ -9,6 +9,8 @@
  * 
  */
 
+import { swap } from "../utils"
+
 
 /**
  * 1- 汉诺塔问题
@@ -111,4 +113,44 @@ function process1(str: string[], index: number, ans: string[], path: string) {
 function printSubsequence2(str: string) {
   const res = printSubsequence(str)
   return Array.from(new Set(res))
+}
+
+/**
+ * 打印字符串的全排列
+ */
+function printPermutation(str: string) {
+  const res: string[] = []
+  if (!str || !str.length) {
+    return res
+  }
+  const strArr = str.split('')
+  process2(strArr, 0, res)
+  return res
+}
+
+/**
+ * str[0,...i-1] 是已经做好决定的
+ * str[i...]都有机会来到i位置
+ * i来到终止位置， str当前的样子就是一种结果 -> res
+ * 
+ * @param str 
+ * @param i 
+ * @param res 
+ */
+function process2(str: string[], i: number, res: string[]) {
+  if (i === str.length) {
+    res.push(str.join(''))
+  }
+
+  /**
+   * 如果i还没有终止， i...都有机会来到i位置  
+   */
+  for (let j = i; j < str.length; j++) {
+    swap(str, i, j)
+    process2(str, i + 1, res)
+    /**
+     * 恢复现场，然后才能进行下一步的遍历
+     */
+    swap(str, i, j)
+  }
 }
