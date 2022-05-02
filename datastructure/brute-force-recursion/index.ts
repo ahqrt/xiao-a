@@ -172,3 +172,97 @@ function process3(str: string[], i: number, res: string[]) {
     }
   }
 }
+
+/**
+ * 从左往右的尝试模型
+ */
+
+/**
+ * 背包问题
+ * 给定两个长度都为N的数组weights和values
+ * weights[i] and values[i] 分别表示i 号物品的重量和价值
+ * 给定一个正数bag，表示一个载重bag的袋子
+ * 你装的物品不能超过这个重量
+ * 返回你能装下最多的价值是多少
+ * 
+ */
+function getMaxValue(weights: number[], values: number[], bag: number) {
+  // return process4(weights, values, 0, 0, bag)
+  return process5(weights, values, 0, bag)
+}
+
+/**
+ * 不变的东西都
+ * w v bag
+ * 
+ * index... 及其以后的位置，自由选择
+ * 
+ * @param w 
+ * @param v 
+ * @param i 
+ * @param alreadyW 0-i-1  上货物的选择，使得你已经达到的重量
+ * @param bag 
+ * 
+ * 如果返回 -1 认为没有方案
+ * 返回不是-1 就是正常的价值
+ */
+function process4(w: number[], v: number[], i: number, alreadyW: number, bag: number) {
+  if (alreadyW > bag) {
+    return -1
+  }
+  // 重量没超过
+  if (i === w.length) {
+    return 0
+  }
+  /**
+   * 我不要当前的index的货
+   */
+  const p1 = process4(w, v, i + 1, alreadyW, bag)
+  /**
+   * 我要了当前的货
+   */
+  const p2Next = process4(w, v, i + 1, alreadyW + w[i], bag)
+
+  let p2 = -1
+  if (p2Next !== -1) {
+    p2 = p2Next + v[i]
+  }
+
+  return Math.max(p1, p2)
+
+}
+
+/**
+ * 背包问题最经典解答处理过车过
+ */
+
+/**
+ * 
+ * @param w 
+ * @param v 
+ * @param index 
+ * @param rest 还剩下多少空间
+ * 
+ * @description index...的货物自由选择，但是剩余空间不要小于0
+ */
+function process5(w: number[], v: number[], index: number, rest: number) {
+  if (rest < 0) {
+    return -1
+  }
+  if (index === w.length) {
+    return 0
+  }
+
+  // 有货也有空间
+
+  const p1 = process5(w, v, index + 1, rest)
+
+  const p2Next = process5(w, v, index + 1, rest - w[index])
+
+  let p2 = -1
+
+  if (p2Next !== -1) {
+    p2 = v[index] + p2Next
+  }
+  return Math.max(p1, p2)
+}
