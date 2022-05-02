@@ -63,3 +63,43 @@ function f(stack: Array<number>) {
     return last
   }
 }
+
+/**
+ * 打印一个字符串的全部子序列
+ */
+function printSubsequence(str: string) {
+  const strArr = str.split('')
+  const path = ''
+  const ans: string[] = []
+  process1(strArr, 0, ans, path)
+  return ans
+}
+
+/**
+ *                abc
+ * 这个字符串的全部子序列是：
+ *                            0
+ *               要a/                  \不要a               
+ *                 1                     1 
+*             要b/    \不要b        要b/      \不要b
+ *             2         2           2         2
+ *          要c/\不要c 要c/\不要c   要c/\不要c 要c/\不要c
+ *          abc  ab    ac  a      bc   b     c  ''
+ * 
+ * 
+ * @param str 一个字符串
+ * @param index index此时来到的位置，要或者不要
+ * @param ans 如果index来到str的终止位置，把沿途路径所形成的答案，放到ans里面
+ * @param path 之前作出的选择，就是path
+ * @returns 
+ */
+function process1(str: string[], index: number, ans: string[], path: string) {
+  if (index === str.length) {
+    ans.push(path)
+    return
+  }
+
+  process1(str, index + 1, ans, path + str[index])
+  process1(str, index + 1, ans, path)
+
+}
