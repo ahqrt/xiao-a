@@ -103,3 +103,12 @@ function process1(str: string[], index: number, ans: string[], path: string) {
   process1(str, index + 1, ans, path)
 
 }
+
+/**
+ * 打印一个字符串的全部子序列，要求不出现重复子面值的子序列
+ * 跟上面的处理一样，只不过把收集的容器，从数组改为Set
+ */
+function printSubsequence2(str: string) {
+  const res = printSubsequence(str)
+  return Array.from(new Set(res))
+}
